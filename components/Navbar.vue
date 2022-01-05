@@ -20,16 +20,34 @@
         </div>
       </div>
 
-      <div class="navbar-nav">
+    <div v-if="!authenticated">
+            <div class="navbar-nav">
         <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
         <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
       </div>
+
     </div>
+
+        <div v-if="authenticated">
+            <div class="navbar-nav">
+        <a class="nav-link">{{user.name}}</a>
+        <a @click="logout" class="nav-link">Logout</a>
+      </div>
+
+    </div>
+    </div>
+
+
+
   </nav>
 </template>
 
 <script>
 export default {
-
+methods: {
+  logout() {
+    this.$auth.logout()
+  }
+}
 };
 </script>
