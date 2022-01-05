@@ -12,7 +12,7 @@
           placeholder="Enter e-mail"
           autofocus
         />
-        <div class="alert-danger">Some errors here</div>
+        <small class="alert-danger" v-if="errors.email">{{ errors.email[0] }}</small>
       </div>
       <div class="mb-3">
         <label class="form-label">Password</label>
@@ -22,7 +22,7 @@
           class="form-control"
           placeholder="Enter your password"
         />
-        <div class="alert-danger">Some errors here</div>
+        <small class="alert-danger" v-if="errors.password">{{ errors.password[0] }}</small>
       </div>
       <button type="submit" class="btn btn-primary">Login</button>
     </form>

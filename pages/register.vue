@@ -2,17 +2,20 @@
   <div class="container cols-md-6 mt-5">
     <h1>Register</h1>
     <hr />
+
     <form @submit.prevent="submit">
       <div class="mb-3">
         <label class="form-label">Full name</label>
         <input v-model.trim="form.name" type="text" class="form-control" placeholder="Enter your name" />
-        <div class="alert-danger">Some errors here</div>
+        <small class="alert-danger" v-if="errors.name">{{ errors.name[0] }}</small>
       </div>
+
       <div class="mb-3">
         <label class="form-label">Email address</label>
         <input v-model.trim="form.email" type="email" class="form-control" placeholder="Enter e-mail" />
-        <div class="alert-danger">Some errors here</div>
+        <small class="alert-danger" v-if="errors.email">{{ errors.email[0] }}</small>
       </div>
+
       <div class="mb-3">
         <label class="form-label">Password</label>
         <input
@@ -21,12 +24,13 @@
           v-model.trim="form.password"
           placeholder="Enter your password"
         />
-        <div class="alert-danger">Some errors here</div>
+        <small class="alert-danger" v-if="errors.password">{{ errors.password[0] }}</small>
       </div>
+      
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
     <br />
-    <p>Have an accont? <nuxt-link to="/login">Login</nuxt-link></p>
+    <p>Already have an accont? <nuxt-link to="/login">Login</nuxt-link></p>
   </div>
 </template>
 
@@ -55,7 +59,3 @@ export default {
   }
 };
 </script>
-
-<style>
-
-</style>
