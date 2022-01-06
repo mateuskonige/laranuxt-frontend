@@ -34,6 +34,8 @@
 <script>
 
 export default {
+  middleware: 'guest',
+
   data() {
     return {
       login: {
@@ -49,7 +51,9 @@ export default {
           data: this.login,
         });
         console.log(response);
-        this.$router.push('/')
+        this.$router.push({
+          path: this.$route.query.redirect || '/profile'
+        })
       } catch (err) {
         console.log(err);
       }

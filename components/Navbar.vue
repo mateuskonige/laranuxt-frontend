@@ -30,7 +30,7 @@
 
         <div v-if="authenticated">
             <div class="navbar-nav">
-        <a class="nav-link">{{user.name}}</a>
+        <nuxt-link to="/profile" class="nav-link">{{user.name}}</nuxt-link>
         <a @click="logout" class="nav-link">Logout</a>
       </div>
 

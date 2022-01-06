@@ -1,12 +1,11 @@
 <template>
   <div>
-    <h1>Home page</h1>
+    <h2>User profile page</h2>
   </div>
 </template>
 
 <script>
 export default {
-  
-  auth: false
-}
+     middleware: 'auth'
+};
 </script>
