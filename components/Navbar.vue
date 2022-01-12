@@ -16,6 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <nuxt-link to="/" class="nav-link">Home</nuxt-link>
+          <nuxt-link to="/topics" class="nav-link">Topics</nuxt-link>
           <nuxt-link v-if="$auth.loggedIn" to="/dashboard" class="nav-link">Create</nuxt-link>
         </div>
       </div>
@@ -30,7 +31,7 @@
 
         <div v-else>
             <div class="navbar-nav">
-        <nuxt-link to="/profile" class="nav-link">{{user.name}}</nuxt-link>
+        <nuxt-link to="/" class="nav-link">{{user.name}}</nuxt-link>
         <a @click="logout" class="nav-link">Logout</a>
       </div>
 
