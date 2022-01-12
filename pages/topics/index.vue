@@ -32,10 +32,19 @@ export default {
       topics: [],
     };
   },
-  async asyncData({ $axios }) {
-    const res = await $axios.$get("topics");
-    return { topics: res.data };
+  async fetch() {
+    await this.getTopics()
   },
+  fetchDelay: 10000,
+
+  methods: {
+    async getTopics() {
+      const data = this.$axios.$get("topics");
+      const res = await data
+      this.topics = res.data
+    }
+  }
+
 };
 </script>
 
