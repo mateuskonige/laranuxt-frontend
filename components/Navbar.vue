@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <nuxt-link to="/" class="nav-link">Home</nuxt-link>
-          <nuxt-link to="/" class="nav-link">Posts</nuxt-link>
+          <nuxt-link v-if="$auth.loggedIn" to="/dashboard" class="nav-link">Create</nuxt-link>
         </div>
       </div>
 

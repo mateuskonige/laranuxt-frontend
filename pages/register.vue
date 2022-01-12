@@ -75,7 +75,7 @@ export default {
         console.log(res.data)
 
         this.$router.push({
-          path: this.$route.query.redirect || '/profile'
+          path: this.$route.query.redirect || '/dashboard'
         })
       } catch (err) {
         console.log(err);
