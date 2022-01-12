@@ -1,4 +1,5 @@
 export default {
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'laranuxt-frontend',
@@ -45,7 +46,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios',
+    "@nuxtjs/axios",
     '@nuxtjs/auth-next'
   ],
 
@@ -54,28 +55,32 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://localhost:8000/api/'
+    baseURL: 'http://localhost:8000/api/',
+    // proxy: true
   },
 
   auth: {
     strategies: {
       local: {
-        token: {
-          property: 'meta.token',
-          global: true,
-          // required: true,
-          // type: 'Bearer'
-        },
-        user: {
-          property: 'data',
-          // autoFetch: true
-        },
         endpoints: {
           login: { url: 'login', method: 'post' },
           logout: { url: 'logout', method: 'post' },
           user: { url: 'user', method: 'get' }
-        }
-      }
+        },
+        token: {
+          property: 'meta.token',
+          global: true
+        },
+        user: {
+          property: 'data',
+        },
+      },
+    },
+    
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: false
     }
   }
 }

@@ -65,12 +65,15 @@ export default {
       try {
         await this.$axios.$post("register", this.form);
 
-        let response = await this.$auth.loginWith("local", {
+        let res = await this.$auth.loginWith("local", {
           data: {
             email: this.form.email,
             password: this.form.password,
           },
         });
+
+        console.log(res.data)
+
         this.$router.push({
           path: this.$route.query.redirect || '/profile'
         })

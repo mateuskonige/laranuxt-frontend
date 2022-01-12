@@ -20,7 +20,7 @@
         </div>
       </div>
 
-    <div v-if="!authenticated">
+    <div v-if="!$auth.loggedIn">
             <div class="navbar-nav">
         <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
         <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
@@ -28,7 +28,7 @@
 
     </div>
 
-        <div v-if="authenticated">
+        <div v-else>
             <div class="navbar-nav">
         <nuxt-link to="/profile" class="nav-link">{{user.name}}</nuxt-link>
         <a @click="logout" class="nav-link">Logout</a>
@@ -45,8 +45,10 @@
 <script>
 export default {
 methods: {
-  logout() {
-    this.$auth.logout()
+  async logout() {
+     await this.$auth.logout()
+  }, catch(e) {
+    console.log(e)
   }
 }
 };

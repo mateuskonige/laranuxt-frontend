@@ -12,7 +12,9 @@
           placeholder="Enter e-mail"
           autofocus
         />
-        <small class="alert-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+        <small class="alert-danger" v-if="errors.email">{{
+          errors.email[0]
+        }}</small>
       </div>
       <div class="mb-3">
         <label class="form-label">Password</label>
@@ -22,7 +24,9 @@
           class="form-control"
           placeholder="Enter your password"
         />
-        <small class="alert-danger" v-if="errors.password">{{ errors.password[0] }}</small>
+        <small class="alert-danger" v-if="errors.password">{{
+          errors.password[0]
+        }}</small>
       </div>
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
@@ -32,7 +36,6 @@
 </template>
 
 <script>
-
 export default {
   middleware: 'guest',
 
@@ -47,13 +50,13 @@ export default {
   methods: {
     async userLogin() {
       try {
-        let response = await this.$auth.loginWith("local", {
-          data: this.login,
-        });
-        console.log(response);
+        const res = await this.$auth.loginWith('local', { data: this.login });
+        
+        console.log(res);
+
         this.$router.push({
-          path: this.$route.query.redirect || '/profile'
-        })
+          path: this.$route.query.redirect || "/profile",
+        });
       } catch (err) {
         console.log(err);
       }
