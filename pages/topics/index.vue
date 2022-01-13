@@ -2,38 +2,47 @@
   <div class="container cols-md-6 mt-5">
     <h1>Latest Topics</h1>
     <hr />
-    <div
-      v-for="(topic, index) in topics"
-      :key="index"
-      class="bg-light my-3 p-3"
-    >
-      <nuxt-link class="fs-2" :to="{name: 'topics-id', params: {id: topic.id}}">{{ topic.title }}</nuxt-link>
-      <p>
-        <small class="text-muted"
-          >{{ topic.created_at }} by {{ topic.user.name }}</small
+
+    <Loading v-if="$fetchState.pending" />
+
+    <div v-else>
+      <div
+        v-for="(topic, index) in topics"
+        :key="index"
+        class="bg-light my-3 p-3"
+      >
+        <nuxt-link
+          class="fs-2"
+          :to="{ name: 'topics-id', params: { id: topic.id } }"
+          >{{ topic.title }}</nuxt-link
         >
-      </p>
-      <div class="px-4" v-for="(content, index) in topic.posts" :key="index">
-        <p>{{ content.body }}</p>
         <p>
           <small class="text-muted"
-            >{{ content.created_at }} by {{ content.user.name }}</small
+            >{{ topic.created_at }} by {{ topic.user.name }}</small
           >
         </p>
+        <div class="px-4" v-for="(content, index) in topic.posts" :key="index">
+          <p>{{ content.body }}</p>
+          <p>
+            <small class="text-muted"
+              >{{ content.created_at }} by {{ content.user.name }}</small
+            >
+          </p>
+        </div>
       </div>
-    </div>
 
-    <nav>
-      <ul class="pagination justify-content-center">
-        <li
-          v-for="(key, value) in links"
-          :key="key"
-          :class="[key ? 'page-item' : 'page-item disabled']"
-        >
-          <a class="page-link" @click="loadMore(key)">{{ value }}</a>
-        </li>
-      </ul>
-    </nav>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li
+            v-for="(key, value) in links"
+            :key="key"
+            :class="[key ? 'page-item' : 'page-item disabled']"
+          >
+            <a class="page-link" @click="loadMore(key)">{{ value }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -48,7 +57,7 @@ export default {
   async fetch() {
     await this.getTopics();
   },
-  fetchDelay: 10000,
+  fetchDelay: 1000,
 
   methods: {
     async getTopics() {

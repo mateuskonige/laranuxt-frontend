@@ -24,7 +24,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/main.css'
   ],
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
 
   router: {
     middleware: ["clearValidationErrors"]

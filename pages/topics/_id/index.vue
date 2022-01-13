@@ -3,12 +3,17 @@
     <nuxt-link class="btn btn-outline-primary" to="/topics">Back</nuxt-link>
     <hr />
 
-    <span># {{ topic.id }}</span>
+        <Loading v-if="$fetchState.pending" />
+
+
+    <div v-else>
+            <span># {{ topic.id }}</span>
     <h2>{{ topic.title }}</h2>
 
     <small>{{ topic.created_at }} by {{ topic }}</small>
     <hr />
     <pre> {{ topic }} </pre>
+    </div>
   </div>
 </template>
 
