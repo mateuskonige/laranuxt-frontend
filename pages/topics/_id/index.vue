@@ -1,0 +1,36 @@
+<template>
+  <div class="container cols-md-6 mt-5">
+    <nuxt-link class="btn btn-outline-primary" to="/topics">Back</nuxt-link>
+    <hr />
+
+    <span># {{ topic.id }}</span>
+    <h2>{{ topic.title }}</h2>
+
+    <small>{{ topic.created_at }} by {{ topic }}</small>
+    <hr />
+    <pre> {{ topic }} </pre>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      topic: {},
+    };
+  },
+  async fetch() {
+    await this.getSingleTopic();
+  },
+  fetchDelay: 1000,
+
+  methods: {
+    async getSingleTopic() {
+      const data = this.$axios.$get(`topics/${this.$route.params.id}`);
+      const res = await data;
+      console.log(res.data);
+      this.topic = res.data;
+    },
+  },
+};
+</script>

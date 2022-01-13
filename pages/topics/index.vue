@@ -7,13 +7,13 @@
       :key="index"
       class="bg-light my-3 p-3"
     >
-      <h2>{{ topic.title }}</h2>
+      <nuxt-link class="fs-2" :to="{name: 'topics-id', params: {id: topic.id}}">{{ topic.title }}</nuxt-link>
       <p>
         <small class="text-muted"
           >{{ topic.created_at }} by {{ topic.user.name }}</small
         >
       </p>
-      <div v-for="(content, index) in topic.posts" :key="index">
+      <div class="px-4" v-for="(content, index) in topic.posts" :key="index">
         <p>{{ content.body }}</p>
         <p>
           <small class="text-muted"
@@ -22,6 +22,18 @@
         </p>
       </div>
     </div>
+
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li
+          v-for="(key, value) in links"
+          :key="key"
+          :class="[key ? 'page-item' : 'page-item disabled']"
+        >
+          <a class="page-link" @click="loadMore(key)">{{ value }}</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -30,23 +42,34 @@ export default {
   data() {
     return {
       topics: [],
+      links: "",
     };
   },
   async fetch() {
-    await this.getTopics()
+    await this.getTopics();
   },
   fetchDelay: 10000,
 
   methods: {
     async getTopics() {
       const data = this.$axios.$get("topics");
-      const res = await data
-      this.topics = res.data
-    }
-  }
+      const res = await data;
+      console.log(res);
+      this.topics = res.data;
+      this.links = res.links;
+    },
+    async loadMore(key) {
+      try {
+        const data = this.$axios.$get(key);
+        const res = await data;
+        console.log(res);
 
+        this.topics = res.data;
+        this.links = res.links;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
-
-<style>
-</style>
