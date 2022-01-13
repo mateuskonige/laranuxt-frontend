@@ -10,9 +10,16 @@
             <span># {{ topic.id }}</span>
     <h2>{{ topic.title }}</h2>
 
-    <small>{{ topic.created_at }} by {{ topic }}</small>
+    <small>{{ topic.created_at }} by {{ topic.user.name }}</small>
     <hr />
-    <pre> {{ topic }} </pre>
+            <div class="px-4" v-for="(content, index) in topic.posts" :key="index">
+          <p>{{ content.body }}</p>
+          <p>
+            <small class="text-muted"
+              >{{ content.created_at }} by {{ content.user.name }}</small>
+          </p>
+        </div>
+
     </div>
   </div>
 </template>
