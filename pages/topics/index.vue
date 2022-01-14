@@ -1,6 +1,20 @@
 <template>
   <div class="container cols-md-6 mt-5">
-    <h1>Latest Topics</h1>
+    <div class="d-flex justify-content-between">
+      <h1>Latest Topics</h1>
+      <!-- Button trigger modal -->
+      <button
+        v-if="$auth.loggedIn"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Add
+      </button>
+    </div>
+
+    <Modal @myEvent="doSomething"/>
     <hr />
 
     <Loading v-if="$fetchState.pending" />
@@ -79,6 +93,9 @@ export default {
         console.log(error);
       }
     },
+    doSomething() {
+      this.$fetch()
+    }
   },
 };
 </script>

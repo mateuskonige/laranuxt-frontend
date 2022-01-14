@@ -17,40 +17,47 @@
         <div class="navbar-nav">
           <nuxt-link to="/" class="nav-link">Home</nuxt-link>
           <nuxt-link to="/topics" class="nav-link">Topics</nuxt-link>
-          <nuxt-link v-if="$auth.loggedIn" to="/dashboard" class="nav-link">Create</nuxt-link>
+
+          <div v-if="$auth.loggedIn">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{ $auth.user.name }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <nuxt-link to="/dashboard" class="nav-link">Create</nuxt-link>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a @click="logout" class="nav-link">Logout</a></li>
+              </ul>
+            </li>
+          </div>
+          <div class="d-flex" v-else>
+            <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
+            <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
+          </div>
         </div>
       </div>
-
-    <div v-if="!$auth.loggedIn">
-            <div class="navbar-nav">
-        <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
-        <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
-      </div>
-
     </div>
-
-        <div v-else>
-            <div class="navbar-nav">
-        <nuxt-link to="/" class="nav-link">{{user.name}}</nuxt-link>
-        <a @click="logout" class="nav-link">Logout</a>
-      </div>
-
-    </div>
-    </div>
-
-
-
   </nav>
 </template>
 
 <script>
 export default {
-methods: {
-  async logout() {
-     await this.$auth.logout()
-  }, catch(e) {
-    console.log(e)
-  }
-}
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+    },
+    catch(e) {
+      console.log(e);
+    },
+  },
 };
 </script>
